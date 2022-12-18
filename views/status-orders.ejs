@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/status-orders.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>HOD Shop</title>
+</head>
+
+<body>
+    <div class="list-order-status">
+        <form action="/" method="get">
+            <header class="header row">
+                <div class="row pt-2">
+                    <div class="col-6">
+                        <span class="ms-5 text-white">Kết nối</span>
+                        <i class="fa-brands fa-facebook mx-2 text-white fs-5"></i>
+                        <i class="fa-brands fa-instagram text-white fs-5"></i>
+                    </div>
+                    <div class="col-6 text-end user-option">
+                        <img src="<%= user.ava ? user.ava : '/images/profile-icon.png' %>" alt="" width="30px" height="30px">
+                        <ul class="text-white ms-2 nav-profile">
+                            <li class="js-option-profile">
+                                <%= user.username %>
+                                    <ul class="subnav text-black js-subnav">
+                                        <li><a href="/my-profile/<%= user.id %>">Tài khoản của tôi</a></li>
+                                        <li><a href="/list-orders-status/<%= user.id %>">Đơn mua</a></li>
+                                        <li><a href="/logout">Đăng xuất</a></li>
+                                    </ul>
+                            </li>
+            
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="logo col-2 text-center">
+                        <a class="d-none d-lg-block" href="/">HQDShop</a>
+                        <a class="d-lg-none" href="/">HQD</a>
+                    </div>
+                    <div class="col-9 input-search position-relative text-center">
+                        <input type="text" placeholder="Nhập tìm kiếm theo tên" name="name">
+                        <button class="position-absolute text-center">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                    <div class="col-1 cart-icon">
+                        <a href="/list-order">
+                            <span>542</span>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+            
+                    </div>
+                </div>
+            </header>
+        </form>
+        
+        <div class="row content p-0 mx-0">
+            <!-- OPTIONS -->
+            <div class="col-2 filter px-0">
+                <div class="setting">
+                    <img class="ms-4" src="https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4" alt=""
+                        width="30px" height="30px">
+                    <span class="">Tài khoản của tôi</span>
+                    <a class="pt-3" href="/my-profile/<%= user.id %>">Hồ Sơ</a>
+                    <a class="py-3" href="/change-password/<%= user.id %>">Đổi mật khẩu</a>
+
+                </div>
+                <div class="ps-4 bill mt-2">
+                    <img src="https://cf.shopee.vn/file/f0049e9df4e536bc3e7f140d071e9078" alt="" width="30px"
+                        height="30px">
+                    <a class="current-tag" href="/list-orders-status/<%= user.id %>">Đơn Mua</a>
+                </div>
+
+            </div>
+
+            <div class="col-10 p-0 list-items">
+                <div class="items" id="js-list-status-items">
+                    <div class="border-bottom">
+                        <div class="tags-pane row px-1 text-center">
+                            <a href="#" class="col-2 py-3 tag1">Tất cả</a>
+                            <a href="#" class="col-2 py-3">Chờ xác nhận</a>
+                            <a href="#" class="col-2 py-3">Chờ lấy hàng</a>
+                            <a href="#" class="col-2 py-3">Đang giao</a>
+                            <a href="#" class="col-2 py-3">Đã giao</a>
+                            <a href="#" class="col-2 py-3">Đã hủy</a>
+                        </div>
+                    </div>
+                    <% for(var i=0; i<5; i++) {%>
+                        <div class="item border-bottom js-item" onclick="clickItem()">
+                            <div class="row px-1">
+                                <div class="col-8 product-pic">
+                                    <div class="row">'
+                                        <div class="col-2 ms-4 py-4">
+                                            <img src="https://cf.shopee.vn/file/d84af0e068a60a3b6e910d623ab3212b" alt=""
+                                                width="80px" height="80px">
+                                        </div>
+                                        <div class="col-9 py-4">
+                                            <span>Set áo lưới cổ V cực xinh</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 status text-end py-4">
+                                    <span class="me-5">ĐANG GIAO</span>
+                                </div>
+                            </div>
+                            <div class="ms-4 pb-4">
+                                <span class="me-2">Tổng số tiền</span>
+                                <span class="currency fs-4">đ</span>
+                                <span class="price fs-4">150000</span>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+                <div class="item-status" id="js-item-status">
+                    <div class="border-bottom">
+                        <div class="tags-pane px-4 py-3 fs-5">
+                            <span>ID ĐƠN HÀNG: </span>
+                            <span class="ms-2">2103JHDH24832</span>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="row px-1">
+                            <div class="col-8 product-pic">
+                                <div class="row">'
+                                    <div class="col-2 ms-4 py-4">
+                                        <img src="https://cf.shopee.vn/file/d84af0e068a60a3b6e910d623ab3212b" alt=""
+                                            width="80px" height="80px">
+                                    </div>
+                                    <div class="col-9 py-4">
+                                        <span>Set áo lưới cổ V cực xinh</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 status text-end py-4">
+                                <span class="me-5">ĐANG GIAO</span>
+                            </div>
+                        </div>
+                        <div class="ms-4 pb-4">
+                            <span class="me-2">Tổng số tiền</span>
+                            <span class="currency fs-4">đ</span>
+                            <span class="price fs-4">150000</span>
+                        </div>
+                    </div>
+                    <div class="item-address mt-4 pb-5">
+                        <div class="tags-pane px-4 py-3">
+                            <h6>ĐỊA CHỈ NHẬN HÀNG</h6>
+                        </div>
+                        <div class="row pb-4">
+                            <div class="col-4 address-info">
+                                <p class="ps-4">Gia Hân</p>
+                                <div class="ps-4 address-detail">
+                                    <span class="d-block">0938950630</span>
+                                    <span>Chung cư Topaz Elite Tạ Quang Bửu P4, Q8, TP.HCM</span>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <p>Phương thức thanh toán</p>
+                                <div class="address-detail">
+                                    <span>Thanh toán khi nhận hàng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- FOOTER -->
+        <div class="text-center footer pb-4">
+            <i class="fa-regular fa-copyright d-inline-block"></i>
+            <span>2022 - Bản quyền thuộc về HQD Shop</span>
+        </div>
+    </div>
+</body>
+<script>
+    function clickItem() {
+        //let item = document.querySelector('.js-item');
+        let listItems = document.getElementById('js-list-status-items');
+        let detailItem = document.getElementById('js-item-status');
+
+        listItems.style.display = 'none';
+        detailItem.style.display = 'block';
+    }
+    function handleForms() {
+        let modalProfile = document.querySelector('.js-option-profile');
+        let subnav = document.querySelector('.js-subnav');
+        const openProfileOptions = () => {
+            console.log("hover");
+            subnav.classList.add('open');
+        }
+        const closeProfileOptions = () => {
+            subnav.classList.remove('open');
+        }
+        modalProfile.addEventListener('mouseover', openProfileOptions);
+        modalProfile.addEventListener('mouseout', closeProfileOptions);
+
+    }
+    handleForms();
+
+</script>
+
+</html>

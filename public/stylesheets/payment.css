@@ -1,0 +1,245 @@
+body {
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+/* ---------------------------- */
+/* PRODUCT-INFO PAGE */
+.payment {
+    min-width: 1200px;
+}
+
+.payment .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateZ(0);
+    z-index: 100;
+    height: 50px;
+    background: linear-gradient(-180deg, #f53d2d, #f63);
+    transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+.payment .user-option>img {
+    border-radius: 50%;
+}
+
+.payment ul {
+    list-style-type: none;
+    padding-left: 0 !important;
+    display: inline-block;
+}
+
+.payment .nav-profile>li {
+    position: relative;
+}
+
+.payment ul li:hover {
+    cursor: pointer;
+}
+
+/* SUBNAV */
+.payment .subnav {
+    display: none;
+    z-index: 1;
+    width: 150px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    /*Bóng đổ cho subnav*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.payment .subnav.open {
+    display: block;
+}
+
+.payment .subnav>li {
+    text-align: left;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.payment .subnav>li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.payment .subnav>li:hover {
+    background-color: #d5d5d5;
+}
+
+.payment .cart-icon i {
+    font-size: 24px;
+    color: white;
+}
+
+/* CONTENT */
+.payment .content {
+    margin-top: 7rem;
+    background-color: #f5f5f5;
+    ;
+}
+
+.payment .content .address-pane .address-pane__content {
+    width: 95%;
+    background-color: #fff;
+}
+
+.payment .content .address-pane .address-pane__content p {
+    color: #f63;
+}
+
+.payment .content .address-pane .address-pane__content .name-buyer {
+    font-weight: 650;
+}
+
+.payment .content .address-pane .address-pane__content button {
+    border: none;
+    background-color: #fff;
+}
+
+.payment .content .list-item .list-item__content {
+    width: 95%;
+    background-color: #fff;
+}
+
+/* ORDERED ITEM */
+.payment .content .list-item .list-item__header>div div:not(:first-child) {
+    color: rgb(124, 138, 154);
+}
+
+.payment .content .list-item .list-item__total>div span {
+    color: #f63;
+}
+
+
+.payment .content .confirm-payment .confirm-payment__content {
+    width: 95%;
+    background-color: #fff;
+}
+
+.payment .content .confirm-payment .confirm-payment__header button {
+    border: 1px solid #f63;
+    background-color: #fff;
+    color: #f63;
+    padding: 7px 12px;
+    border-radius: 2px;
+}
+
+.payment .content .confirm-payment .confirm-payment__buy-btn .total>span {
+    color: rgb(124, 138, 154);
+}
+
+.payment .content .confirm-payment .confirm-payment__buy-btn .total>div {
+    color: #f63;
+}
+
+.payment .content .confirm-payment .confirm-payment__buy-btn button {
+    border: none;
+    background-color: #f53d2d;
+    color: #fff;
+    padding: 12px 40px;
+    border-radius: 2px;
+}
+
+/* FOOTER */
+.payment .footer {
+    padding-top: 20rem;
+    background-color: #f5f5f5;
+    color: rgb(124, 138, 154);
+}
+
+
+.payment .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+    display: none;
+
+}
+
+.payment .modal.open {
+    display: flex;
+}
+
+.payment .modal-container {
+    background: #fff;
+    width: 500px;
+    /*để sdung pos absolute cho mấy thẻ con */
+    position: relative;
+
+    /* Để sdung keyframes modalFadeIn đi chậm ease 0.3s*/
+    animation: modalFadeIn ease 0.5s
+}
+
+.payment .modal-header {}
+
+.payment .modal-body {
+    padding: 16px;
+}
+
+.payment .modal-label {
+    /* Mỗi label nằm trên 1 hàng riêng biệt */
+    display: block;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+/*Khung input*/
+.payment .modal-input {
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+
+.payment button[type="submit"] {
+    border: none;
+    color: #fff;
+    background-color: #f53d2d;
+    padding: 10px 24px;
+}
+
+.payment .modal-body .cancel {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #ccc;
+    padding: 10px 24px;
+}
+
+
+/* Làm trôi ảnh MODAL CONTAINER*/
+/* Tạo ra chuyển động liên tiếp của ảnh tĩnh */
+@keyframes modalFadeIn {
+
+    /* modal container sẽ đi từ -100px đến 0px*/
+    from {
+        opacity: 0;
+        transform: translateY(-150px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

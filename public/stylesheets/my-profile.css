@@ -1,0 +1,247 @@
+body {
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+/* MY PROFILE PAGE */
+.my-profile {
+    min-width: 1200px;
+}
+
+.my-profile .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateZ(0);
+    z-index: 100;
+    height: 100px;
+    background: linear-gradient(-180deg, #f53d2d, #f63);
+    transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+}
+.my-profile .user-option>img {
+    border-radius: 50%;
+}
+.my-profile ul {
+    list-style-type: none;
+    padding-left: 0 !important;
+    display: inline-block;
+}
+
+.my-profile .nav-profile>li {
+    position: relative;
+}
+
+.my-profile ul li:hover {
+    cursor: pointer;
+}
+.my-profile .header .logo a {
+    position: relative;
+    top: -0.9rem;
+    right: -1rem;
+    text-decoration: none;
+    color: rgb(210, 14, 53);
+    font-weight: 800;
+    font-size: 35px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+/* PROFILE OPTIONS WHEN LOGGED*/
+.my-profile ul {
+    list-style-type: none;
+    padding-left: 0 !important;
+    display: inline-block;
+}
+
+.my-profile .nav-profile>li {
+    position: relative;
+}
+
+.my-profile ul li:hover {
+    cursor: pointer;
+}
+
+/* SUBNAV */
+.my-profile .subnav {
+    display: none;
+    z-index: 1;
+    width: 150px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    /*Bóng đổ cho subnav*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.my-profile .subnav.open {
+    display: block;
+}
+
+.my-profile .subnav>li {
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.my-profile .subnav>li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.my-profile .subnav>li:hover {
+    background-color: #d5d5d5;
+}
+
+
+
+.my-profile .cart-icon a {
+    text-decoration: none;
+    position: relative;
+}
+
+.my-profile .cart-icon i {
+    font-size: 24px;
+    color: white;
+}
+
+.my-profile .cart-icon span {
+    text-align: center;
+    position: absolute;
+    border-radius: 50%;
+    font-size: 15px;
+    width: 30px;
+    color: #f53d2d;
+    background-color: #fff;
+    top: -1rem;
+    right: -1rem;
+}
+
+.my-profile .cart-icon i:hover {
+    cursor: pointer;
+}
+
+.my-profile .input-search input {
+    width: 80%;
+}
+
+.my-profile .input-search input:focus {
+    outline: none;
+}
+.my-profile .input-search button {
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    right: 11.5%;
+    top: 3px;
+}
+.my-profile .input-search i {
+    right: 12.5%;
+    top: 6px;
+}
+
+/* CONTENT */
+.my-profile .content {
+    background-color: #f5f5f5;
+    margin-top: 7rem;
+}
+
+.my-profile .content .setting a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    padding-left: 3.6rem;
+    font-weight: 350;
+}
+
+.my-profile .content .current-tag {
+    color: #f63 !important;
+}
+
+.my-profile .content .bill a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* CARD PROFILE */
+.my-profile .content .card-profile {
+    background-color: #fff;
+    width: 996px;
+}
+
+.my-profile .content .card-profile .header-card h6 {
+    font-weight: 400;
+}
+
+.my-profile .content .card-profile .body-card .avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.my-profile .content .card-profile .body-card .avatar label {
+    border: 1px solid #d5d5d5;
+    width: 120px;
+    padding: 10px 0;
+    color: rgb(124, 138, 154);
+}
+
+.my-profile .content .card-profile .body-card .avatar label:hover {
+    cursor: pointer;
+}
+
+.my-profile .card-profile .body-card .details label {
+    color: rgb(124, 138, 154);
+    width: 120px;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.my-profile .card-profile .body-card .details input {
+    padding: 0.5rem;
+    width: 75%;
+    border: 1px solid #d5d5d5;
+}
+
+.my-profile .card-profile .body-card .details input:focus {
+    outline: none;
+}
+
+.my-profile .card-profile .body-card .details .sex-profile input {
+    width: 20px;
+}
+
+.my-profile .card-profile .body-card .details .sex-profile label {
+    width: 50px;
+    color: #000;
+}
+
+.my-profile .card-profile .body-card .details .sex-profile label:first-child {
+    width: 120px;
+    color: rgb(124, 138, 154);
+}
+
+.my-profile .card-profile .body-card input[type="submit"] {
+    color: #ffff;
+    border: 1.5px solid rgb(245, 77, 16);
+    background-color: rgb(245, 77, 16);
+    border-radius: 3px;
+}
+
+/* FOOTER */
+.my-profile .footer {
+    padding-top: 30rem;
+    background-color: #f5f5f5;
+    color: rgb(124, 138, 154);
+}

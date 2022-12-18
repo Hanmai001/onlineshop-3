@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HQD Shop</title>
+    <link rel="stylesheet" href="/stylesheets/home.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!-- Block Element Modifier -->
+    <div class="home">
+        <form action="" onsubmit="disableEmptyInputs(this)" method="get">
+            <header class="header row">
+                <div class="row pt-2">
+                    <div class="col-6">
+                        <span class="ms-5 text-white">Kết nối</span>
+                        <i class="fa-brands fa-facebook mx-2 text-white fs-5"></i>
+                        <i class="fa-brands fa-instagram text-white fs-5"></i>
+                    </div>
+
+                    <% if(user){ %>
+                        <div class="col-6 text-end user-option">
+                            <img src="<%= user.ava ? user.ava : '/images/profile-icon.png' %>" alt="" width="30px"
+                                height="30px">
+                            <ul class="text-white ms-2 nav-profile">
+                                <li class="js-option-profile" onmouseover="hoverAva(this)">
+                                    <%= user.username %>
+                                        <ul class="subnav text-black js-subnav">
+                                            <li><a href="/my-profile/profile">Tài khoản của tôi</a></li>
+                                            <li><a href="/my-profile/list-orders-status">Đơn mua</a></li>
+                                            <li><a href="/logout">Đăng xuất</a></li>
+                                        </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <% } else{ %>
+                            <ul class="col-6 text-end">
+                                <li id="register-item" class="text-white me-3">Đăng kí</li>
+                                <li id="login-item" class="text-white">Đăng nhập</li>
+                            </ul>
+                            <% } %>
+
+                </div>
+                <div class="row">
+                    <div class="logo col-2 text-center">
+                        <a class="d-none d-lg-block" href="/">HQDShop</a>
+                        <a class="d-lg-none" href="/">HQD</a>
+                    </div>
+                    <div class="col-9 input-search position-relative text-center">
+                        <!-- <form action="#"> -->
+                        <input type="text" placeholder="Nhập tìm kiếm theo tên" name="name">
+                        <button class="position-absolute text-center">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+
+                        <!-- </form> -->
+
+                    </div>
+                    <div class="col-1 cart-icon">
+                        <a onclick="clickCart()">
+                            <span>
+                                <%= user ? 542 : 0 %>
+                            </span>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+            <div class="row content pb-5 mx-0">
+                <!-- FILTER -->
+                <div class="col-2 filter">
+                    <div class="ms-4">
+                        <i class="fa-solid fa-filter"></i>
+                        <h6 class="d-inline-block">BỘ LỌC TÌM KIẾM</h6>
+                    </div>
+                    <div class="ms-4 mt-2 filter-item">
+                        <p>Theo tên</p>
+                        <!-- <form action="/"> -->
+                        <% for (let i=0; i < names.length; i++) {%>
+                            <div class="row">
+                                <input class="col-1" type="checkbox" id="filter-name<%= i + 1 %>" name="name"
+                                    value="<%= names[i] %>">
+                                <label class="col-11" for="filter-name<%= i + 1 %>">
+                                    <%= names[i] %>
+                                </label><br>
+                            </div>
+                            <% } %>
+                                <!-- </form> -->
+                    </div>
+                    <div class="ms-4 mt-2 filter-item">
+                        <p>Theo loại</p>
+                        <!-- <form action="/"> -->
+                        <% for (let i=0; i < types.length;i++) {%>
+                            <input type="checkbox" id="filter-type<%= i + 1 %>" name="type"
+                                value="<%= types[i].NAMETYPE %>">
+                            <label for="filter-type<%= i + 1 %>">
+                                <%= types[i].NAMETYPE %>
+                            </label><br>
+
+                            <% } %>
+                                <!-- </form> -->
+                    </div>
+                    <div class="ms-4 mt-2 filter-item">
+                        <p>Thương hiệu</p>
+                        <!-- <form action="/"> -->
+                        <% for (let i=0; i < brands.length;i++) {%>
+                            <input type="checkbox" id="filter-brand<%= i + 1 %>" name="brand"
+                                value="<%= brands[i].NAMEBRAND %>">
+                            <label for="filter-brand<%= i + 1 %>">
+                                <%= brands[i].NAMEBRAND %>
+                            </label><br>
+                            <% } %>
+                                <!-- </form> -->
+                    </div>
+                    <div class="ms-4 mt-2 filter-item">
+                        <p>Nhà sản xuất</p>
+                        <!-- <form action="/"> -->
+                        <% for (let i=0; i < manufacturers.length;i++) {%>
+                            <div class="row">
+                                <input class="col-1" type="checkbox" id="filter-manu<%= i + 1 %>" name="manufacturer"
+                                    value="<%= manufacturers[i].NAMEMANUFACTURER %>">
+                                <label class="col-11" for="filter-manu<%= i + 1 %>">
+                                    <%= manufacturers[i].NAMEMANUFACTURER %>
+                                </label><br>
+                            </div>
+
+                            <% } %>
+                                <!-- </form> -->
+                    </div>
+                    <div class="ms-4 mt-2 filter-price">
+                        <p>Khoảng giá</p>
+                        <!-- <form action=""> -->
+                        <input type="text" placeholder="TỪ" id="price-from" name="priceFrom">
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                        <input type="text" placeholder="ĐẾN" id="price-to" name="priceTo">
+                        <input class="mt-2 text-white" type="submit" value="ÁP DỤNG">
+                        <!-- </form> -->
+                    </div>
+                </div>
+                <!-- PRODUCTS -->
+                <div class="col-10">
+                    <div class="sort-list">
+                        <div class="p-3">
+                            <span class="mx-2">Sắp xếp theo</span>
+                            <div class="d-inline-block">
+                                <input type="submit" placeholder="Thời gian tạo" name="timeCreate" id="time-create"
+                                    value="Thời gian tạo" readonly>
+                                <input type="submit" placeholder="Lượt mua" name="numBuy" id="num-buy" value="Lượt mua"
+                                    readonly>
+                                <input type="submit" placeholder="Gía" name="sortPrice" id="sort-price" value="Giá"
+                                    readonly>
+                                <select id="select-sort" name="sort">
+                                    <option value="up">Thấp đến cao</option>
+                                    <option value="down">Cao đến thấp</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="products d-flex flex-wrap">
+
+                        <% for(var i=0; i<products.length; i++) {%>
+                            <div class="item my-3 me-4" onclick="chooseProduct('<%= products[i].IDPRODUCT %>')">
+                                <div class="img text-center">
+                                    <img src="<%= products[i].LINK %>" alt="">
+                                </div>
+                                <div class="name ps-1">
+                                    <span>
+                                        <%= products[i].NAMEPRODUCT.length> 20 ? products[i].NAMEPRODUCT.slice(0, 40) +
+                                            `...` : products[i].NAMEPRODUCT %>
+                                    </span>
+                                </div>
+                                <div class="price">
+                                    <span class="me-1">
+                                        <%= products[i].PRICE %>
+                                    </span>
+                                </div>
+                                <div class="sold">
+                                    <span class="fw-bold">4/5</span>
+                                    <span class="me-1 fw-bold">
+                                        <%= products[i].NUMBUY %> đã bán
+                                    </span>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+
+                    <!-- PAGING -->
+                    <div class="paging text-center mt-4 fs-3">
+                        <a href="#">&laquo;</a>
+                        <a href="#">1</a>
+                        <a class="active" href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">&raquo;</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- FOOTER -->
+        <div class="text-center footer pb-4">
+            <i class="fa-regular fa-copyright d-inline-block"></i>
+            <span>2022 - Bản quyền thuộc về HQD Shop</span>
+        </div>
+
+        <!--Modal layout-->
+        <div class="modal">
+
+            <div class="modal__body">
+                <!-- Register Form -->
+                <form action="/register" id="register-form" class="auth-form" method="post">
+                    <div class="auth-form__container">
+                        <div class="auth-form__header">
+                            <div class="auth-form__heading">Đăng ký</div>
+                        </div>
+
+                        <div class="auth-form__groups">
+                            <div class="auth-form__group">
+                                <input id="username" rule="username" type="text" class="auth-form__input"
+                                    placeholder="Username của bạn" name="username" />
+                            </div>
+                            <div class="auth-form__group">
+                                <input id="email" rule="email" type="email" class="auth-form__input"
+                                    placeholder="Email của bạn" name="email" />
+                            </div>
+                            <div class="auth-form__group">
+                                <input id="password" rule="password" type="password" class="auth-form__input"
+                                    placeholder="Mật khẩu của bạn" name="password" />
+                            </div>
+                            <div class="auth-form__group">
+                                <input id="password_confirmation" rule="password_confirmation" type="password"
+                                    class="auth-form__input" placeholder="Nhập lại mật khẩu của bạn"
+                                    name="confirmPassword" /><span class="auth-form__message"></span>
+                            </div>
+                            <% if(flashMessages.registerMessage){ %>
+                                <p class="text-danger" id="message">
+                                    <%= flashMessages.registerMessage %>
+                                </p>
+                                <% } %>
+                        </div>
+
+                        <div class="auth-form__aside">
+                            <p class="auth-form__policy-text">
+                                Bằng việc đăng ký, bạn đã đồng ý với Minecraft Shop
+                                <a href="" class="auth-form__text-link">Điều khoản dịch vụ</a> &
+                                <a href="" class="auth-form__text-link">Chính sách bảo mật</a>
+                            </p>
+
+                            <div class="auth-form__switch-wrapper">
+                                <span class="auth-form__switch-text">Bạn đã có tài khoản?</span>
+                                <span class="auth-form__switch-btn">Đăng nhập</span>
+                            </div>
+                        </div>
+
+                        <div class="auth-form__controls">
+                            <input type="text" readonly class="btn auth-form__controls-back me-2"
+                                id="js-form-btn-back" placeholder="TRỞ LẠI"/>
+                            <button readonly class="btn btn--primary">ĐĂNG KÝ</button>
+                        </div>
+                    </div>
+
+
+                    <div class="auth-form__socials">
+                        <a href="" class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
+                            <i class="auth-form__socials-icon fab fa-facebook-square"></i>
+                            <span class="auth-form__socials-title">
+                                Kết nối với Facebook
+                            </span>
+                        </a>
+                        <a href="" class="auth-form__socials--google btn btn--size-s btn--with-icon">
+                            <i class="auth-form__socials-icon fab fa-google"></i>
+                            <span class="auth-form__socials-title">
+                                Kết nối với Google
+                            </span>
+                        </a>
+                    </div>
+                </form>
+                <!-- Login Form -->
+
+                <form action="/login" id="login-form" class="auth-form" method="post">
+                    <div class="auth-form__container">
+                        <div class="auth-form__header">
+                            <div class="auth-form__heading">Đăng nhập</div>
+                        </div>
+
+                        <div class="auth-form__groups">
+                            <div class="auth-form__group">
+                                <input id="username" rule="username" type="text" class="auth-form__input"
+                                    placeholder="Username" name="username" required />
+                            </div>
+                            <div class="auth-form__group">
+                                <input id="password" rule="password" type="password" class="auth-form__input"
+                                    placeholder="Mật khẩu của bạn" name="password" required />
+                            </div>
+                            <% if(flashMessages.loginMessage){ %>
+                                <p class="text-danger" id="message">
+                                    <%= flashMessages.loginMessage %>
+                                </p>
+                                <% } %>
+                        </div>
+
+                        <div class="auth-form__aside">
+                            <div class="auth-form__help">
+                                <a id="forget-item" class="auth-form__help-link auth-form__help-forgot">Quên
+                                    mậtkhẩu</a>
+                                <span class="auth-form__help-separate"></span>
+                                <a href="" class="auth-form__help-link">Cần trợ giúp?</a>
+                            </div>
+                        </div>
+
+                        <div class="auth-form__controls">
+                            <button class="btn auth-form__controls-back me-2" id="js-form-btn-back">TRỞ LẠI</button>
+                            <button class="btn btn--primary">ĐĂNG NHẬP</button>
+                        </div>
+
+                        <div class="auth-form__switch-wrapper">
+                            <span class="auth-form__switch-text">Bạn chưa có tài khoản?</span>
+                            <span class="auth-form__switch-btn">Đăng ký</span>
+                        </div>
+                    </div>
+
+
+                    <div class="auth-form__socials">
+                        <a href="" class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
+                            <i class="auth-form__socials-icon fab fa-facebook-square"></i>
+                            <span class="auth-form__socials-title">
+                                Kết nối với Facebook
+                            </span>
+                        </a>
+                        <a href="" class="auth-form__socials--google btn btn--size-s btn--with-icon">
+                            <i class="auth-form__socials-icon fab fa-google"></i>
+                            <span class="auth-form__socials-title">
+                                Kết nối với Google
+                            </span>
+                        </a>
+                    </div>
+                </form>
+
+                <!-- Forget Form -->
+                <form action="/forget" id="forget-form" class="auth-form" method="post">
+                    <div class="auth-form__container">
+                        <div class="auth-form__header">
+                            <div class="auth-form__heading">Quên mật khẩu</div>
+                        </div>
+
+                        <div class="auth-form__groups">
+                            <div class="auth-form__group">
+                                <input id="email" rule="email" type="text" class="auth-form__input"
+                                    placeholder="Email address" name="email" required />
+                            </div>
+                            <% if(flashMessages.emailMessage){ %>
+                                <p class="text-danger" id="message">
+                                    <%= flashMessages.emailMessage %>
+                                </p>
+                                <% } %>
+                        </div>
+
+                        <div class="auth-form__controls">
+                            <button class="btn btn--primary">Send password reset link</button>
+                        </div>
+
+                        <div class="auth-form__switch-wrapper">
+                            <span class="auth-form__switch-text">Bạn chưa có tài khoản?</span>
+                            <span class="auth-form__switch-btn">Đăng ký</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var message1 = "<%= flashMessages.loginMessage %>";
+    var message2 = "<%= flashMessages.registerMessage %>";
+    var message3 = "<%= flashMessages.emailMessage %>";
+    function chooseProduct(id) {
+        window.location.href = "/products/details/" + id;
+    }
+    function clickCart() {
+        if ("<%= user %>")
+            window.location.href = "/list-order";
+        else {
+            window.location.href = "/";
+        }
+    }
+    function hoverAva() {
+        let modalProfile = document.querySelector('.js-option-profile');
+        let subnav = document.querySelector('.js-subnav');
+        const openProfileOptions = () => {
+            subnav.classList.add('open');
+        }
+        const closeProfileOptions = () => {
+            subnav.classList.remove('open');
+        }
+
+        modalProfile.addEventListener('mouseover', openProfileOptions);
+        modalProfile.addEventListener('mouseout', closeProfileOptions);
+    }
+    function handleForms() {
+        let regItem = document.getElementById('register-item'); // get element of register item
+        let logItem = document.getElementById('login-item'); // get element of register item
+        let forgetItem = document.getElementById('forget-item');
+        let btnBack = document.getElementById('js-form-btn-back');
+
+        let modalLayer = document.querySelector('.modal'); // get element of modal layer
+        let modalBody = document.querySelector('.modal__body');
+
+        let regForm = document.getElementById('register-form'); // get element of register form
+        let logForm = document.getElementById('login-form'); // get element of login form
+        let forgetForm = document.getElementById('forget-form');
+
+        let regToLogBtn = document.querySelector('#register-form .auth-form__switch-btn'); // get element of login button from register form
+        let logToRegBtn = document.querySelector('#login-form .auth-form__switch-btn'); // get element of register button from login form
+        // let logToForBtn = document.querySelector('#forget-form .auth-form__switch-btn');
+
+        const openForm = (check) => {
+
+            console.log('user: ');
+            modalLayer.classList.add('open');
+            if (check === 1) {
+                regForm.style.display = 'block';
+                logForm.style.display = 'none';
+                forgetForm.style.display = 'none';
+            }
+            else if (check === 2) {
+                regForm.style.display = 'none';
+                logForm.style.display = 'block';
+                forgetForm.style.display = 'none';
+            }
+            else if (check === 3) {
+                regForm.style.display = 'none';
+                logForm.style.display = 'none';
+                forgetForm.style.display = 'block';
+            }
+
+
+        }
+        const closeForm = () => {
+
+            const message = document.getElementById('message');
+            if (message)
+                message.remove();
+            modalLayer.classList.remove('open');
+            regForm.style.display = 'none';
+            logForm.style.display = 'none';
+            forgetForm.style.display = 'none';
+
+        }
+        
+        if (message1) {
+            openForm(2);
+        }
+        if (message2) {
+            openForm(1);
+        }
+        
+        regItem.addEventListener('click', () => openForm(1));
+        logItem.addEventListener('click', () => openForm(2));
+        forgetItem.addEventListener('click', () => openForm(3));
+        btnBack.addEventListener('click', () => closeForm);
+        modalLayer.addEventListener('click', closeForm);
+        modalBody.addEventListener('click', function (event) {
+            event.stopPropagation()
+        })
+
+
+
+    }
+    function disableEmptyInputs(form) {
+        var controls = form.elements;
+        for (var i = 0, iLen = controls.length; i < iLen; i++) {
+            if (controls[i].value == '') controls[i].disabled = true;
+        }
+    }
+
+    handleForms();
+
+</script>
+
+</html>

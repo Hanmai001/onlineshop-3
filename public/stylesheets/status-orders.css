@@ -1,0 +1,241 @@
+body {
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+/* MY PROFILE PAGE */
+.list-order-status {
+    min-width: 1024px;
+}
+
+.list-order-status .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateZ(0);
+    z-index: 100;
+    height: 100px;
+    background: linear-gradient(-180deg, #f53d2d, #f63);
+    transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+}
+.list-order-status .user-option>img {
+    border-radius: 50%;
+}
+.list-order-status ul {
+    list-style-type: none;
+    padding-left: 0 !important;
+    display: inline-block;
+}
+
+.list-order-status .nav-profile>li {
+    position: relative;
+}
+
+.list-order-status ul li:hover {
+    cursor: pointer;
+}
+
+.list-order-status .header .logo a {
+    position: relative;
+    top: -0.9rem;
+    right: -1rem;
+    text-decoration: none;
+    color: rgb(210, 14, 53);
+    font-weight: 800;
+    font-size: 35px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+/* PROFILE OPTIONS WHEN LOGGED*/
+.list-order-status ul {
+    list-style-type: none;
+    padding-left: 0 !important;
+    display: inline-block;
+}
+
+.list-order-status .nav-profile>li {
+    position: relative;
+}
+
+.list-order-status ul li:hover {
+    cursor: pointer;
+}
+
+/* SUBNAV */
+.list-order-status .subnav {
+    display: none;
+    z-index: 1;
+    width: 150px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    /*Bóng đổ cho subnav*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.list-order-status .subnav.open {
+    display: block;
+}
+
+.list-order-status .subnav>li {
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.list-order-status .subnav>li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.list-order-status .subnav>li:hover {
+    background-color: #d5d5d5;
+}
+
+
+
+.list-order-status .cart-icon a {
+    text-decoration: none;
+    position: relative;
+}
+
+.list-order-status .cart-icon i {
+    font-size: 24px;
+    color: white;
+}
+
+.list-order-status .cart-icon span {
+    text-align: center;
+    position: absolute;
+    border-radius: 50%;
+    font-size: 15px;
+    width: 30px;
+    color: #f53d2d;
+    background-color: #fff;
+    top: -1rem;
+    right: -1rem;
+}
+
+.list-order-status .cart-icon i:hover {
+    cursor: pointer;
+}
+
+.list-order-status .input-search input {
+    width: 80%;
+}
+
+.list-order-status .input-search input:focus {
+    outline: none;
+}
+.list-order-status .input-search button {
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    right: 11.5%;
+    top: 3px;
+}
+.list-order-status .input-search i {
+    right: 12.5%;
+    top: 6px;
+}
+
+/* CONTENT */
+.list-order-status .content {
+    background-color: #f5f5f5;
+    margin-top: 7rem;
+}
+
+.list-order-status .content .setting a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    padding-left: 3.6rem;
+    font-weight: 350;
+}
+.list-order-status .content .current-tag {
+    color: #f63 !important;
+}
+.list-order-status .content .current-tag {
+    color: #f63 !important;
+}
+
+.list-order-status .content .bill a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* CARD PROFILE */
+.list-order-status .content .list-items {
+    background-color: #fff;
+    width: 996px;
+}
+
+/* .list-order-status .content .items {
+    display: none;
+} */
+
+.list-order-status .content .tags-pane a {
+    color: #000;
+    text-decoration: none;
+}
+
+.list-order-status .content .tags-pane a:hover {
+    color: #f63;
+}
+
+.list-order-status .content .items .status span {
+    color: #f63;
+}
+
+.list-order-status .content .items .item .currency {
+    text-decoration: underline;
+    color: #f63;
+}
+.list-order-status .content .items .item:hover {
+    cursor: pointer;
+}
+
+.list-order-status .content .items .item .price {
+    color: #f63;
+}
+
+/* FOOTER */
+.list-order-status .footer {
+    padding-top: 30rem;
+    background-color: #f5f5f5;
+    color: rgb(124, 138, 154);
+}
+
+.list-order-status .content .item-status {
+    display: none;
+}
+.list-order-status .content .item-status .status span {
+    color: #f63;
+}
+
+.list-order-status .content .item-status .item .currency {
+    text-decoration: underline;
+    color: #f63;
+}
+
+.list-order-status .content .item-status .item .price {
+    color: #f63;
+}
+
+.list-order-status .content .item-status .item-address .address-detail {
+    color: rgb(124, 138, 154);
+}

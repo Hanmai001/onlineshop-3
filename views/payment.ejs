@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/payment.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>HOD Shop</title>
+</head>
+
+<body>
+    <div class="payment">
+        <header class="header row">
+            <div class="row pt-2">
+                <div class="col-6">
+                    <span class="ms-5 text-white">Kết nối</span>
+                    <i class="fa-brands fa-facebook mx-2 text-white fs-5"></i>
+                    <i class="fa-brands fa-instagram text-white fs-5"></i>
+                </div>
+                <div class="col-6 text-end user-option">
+                    <img src="<%= user.ava ? user.ava : '/images/profile-icon.png' %>" alt="" width="30px" height="30px">
+                    <ul class="text-white ms-2 nav-profile">
+                        <li class="js-option-profile"><%= user.username %>
+                            <ul class="subnav text-black js-subnav">
+                                <li><a href="/my-profile/profile">Tài khoản của tôi</a></li>
+                                <li><a href="/my-profile/list-orders-status">Đơn mua</a></li>
+                                <li><a href="/logout">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+           
+        </header>
+        <div class="content">
+            <div class="address-pane">
+                <div class="m-auto address-pane__content px-4 py-3">
+                    <p class="fs-5">Địa Chỉ Nhận Hàng</p>
+                    <div class="row">
+                        <div class="col-2 name-buyer">
+                            <span>Gia Hân</span>
+                            <span>0940353432</span>
+                        </div>
+                        <div class="col-8">
+                            <span>123 ấp 3 xã Long Thới, huyện Nhà Bè, TP.Hồ Chí Minh</span>
+
+                        </div>
+                        <div class="col-2 text-end">
+                            <button id="js-open-modal" class="text-primary">Thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-item mt-4">
+                <div class="m-auto list-item__content pt-3">
+                    <div class="list-item__header border-bottom">
+                        <div class="row py-2 px-4">
+                            <div class="col-6 fs-5">
+                                <p class="">Sản Phẩm</p>
+                            </div>
+                            <div class="col-2 text-center">
+                                <p>Đơn Giá</p>
+                            </div>
+                            <div class="col-2 text-center">
+                                <p>Số Lượng</p>
+                            </div>
+                            <div class="col-2 text-center">
+                                <p>Thành Tiền</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <% for(var i=0; i<5; i++) {%>
+                        <div class="list-item__item m-auto border-bottom">
+                            <div class="row py-4 px-4 product">
+                                <div class="col-6 product-pic">
+                                    <div class="row">'
+                                        <div class="col-2">
+                                            <img src="https://cf.shopee.vn/file/d84af0e068a60a3b6e910d623ab3212b" alt=""
+                                                width="80px" height="80px">
+                                        </div>
+                                        <div class="col-9">
+                                            <span>Set áo lưới cổ V cực xinh</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 product-price text-center">
+                                    <span class="text-decoration-underline">đ</span>
+                                    <span>155000</span>
+                                </div>
+                                <div class="col-2 num-buy text-center">
+                                    <span>12</span>
+                                </div>
+                                <div class="col-2 total-price text-center">
+                                    <span class="text-decoration-underline">đ</span>
+                                    <span>155000</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    <% } %>
+                    <div class="list-item__total px-4 py-4">
+                        <span class="me-3 fs-5">Tổng số tiền</span>
+                        <div class="d-inline-block fs-5">
+                            <span class="text-decoration-underline">đ</span>
+                            <span>155000</span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="confirm-payment mt-4">
+                <div class="confirm-payment__content pt-3 m-auto">
+                    <div class="confirm-payment__header border-bottom pb-3">
+                        <span class="fs-5 px-4">Phương thức thanh toán</span>
+                        <button>Thanh toán khi nhận hàng</button>
+                    </div>
+                    <div class="confirm-payment__buy-btn border-bottom pb-3">
+                        <div class="px-4 py-3 total">
+                            <span class="me-3">Tổng số tiền</span>
+                            <div class="d-inline-block">
+                                <span class="text-decoration-underline">đ</span>
+                                <span>155000</span>
+                            </div>
+                        </div>
+                        <div class="text-end pt-5">
+                            <button class="me-3">
+                                ĐẶT HÀNG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--MODAL-->
+        <div class="modal js-modal">
+            <div class="modal-container js-modal-container">
+                <header class="modal-header">
+                    <p class="fs-5">Cập Nhật Địa Chỉ</p>
+                </header>
+                <div class="modal-body js-modal-body">
+                    <form action="#" id="update-address-form">
+                        <label for="update-name" class="modal-label">
+                            <i class="ti-shopping-cart"></i>
+                            Họ và tên
+                        </label>
+                        <input id="update-name" type="text" class="modal-input" placeholder="Họ và tên">
+                        <label for="update-phone" class="modal-label">
+                            <i class="ti-user"></i>
+                            Số điện thoại
+                        </label>
+                        <input id="update-phone" type="text" class="modal-input" placeholder="SĐT">
+                        <label for="update-address" class="modal-label">
+                            <i class="ti-user"></i>
+                            Địa chỉ cụ thể
+                        </label>
+                       
+                        <input id="update-address" type="text" class="modal-input" placeholder="Địa chỉ">
+                       
+                    </form>
+                    <!--BUTTONs-->    
+                    <div class="text-end py-2">
+                        <button id="js-update-btn" type="submit" for="update-address-form">CẬP NHẬT</button>
+                        <button id="js-modal-close" class="cancel">HỦY</button>
+                    </div>       
+                    
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER -->
+        <div class="text-center footer pb-4">
+            <i class="fa-regular fa-copyright d-inline-block"></i>
+            <span>2022 - Bản quyền thuộc về HQD Shop</span>
+        </div>
+    </div>
+</body>
+<script>
+    function handleForms() {
+        let changeBtn = document.getElementById('js-open-modal'); // get element of register item
+        let updateBtn = document.getElementById('js-update-btn'); // get element of register item
+        let cancelBtn = document.getElementById('js-modal-close');
+        let modalLayer = document.querySelector('.js-modal'); // get element of modal layer
+        let modalBody = document.querySelector('.js-modal-body');
+
+        let modalProfile = document.querySelector('.js-option-profile');
+        let subnav = document.querySelector('.js-subnav');
+        console.log(modalProfile);
+        const openForm = () => {
+            modalLayer.classList.add('open');
+        }
+        const closeForm = () => {
+            modalLayer.classList.remove('open');
+
+        }
+        const openProfileOptions = () => {
+            subnav.classList.add('open');
+        }
+        const closeProfileOptions = () => {
+            subnav.classList.remove('open');
+        }
+        changeBtn.addEventListener('click', openForm);
+        cancelBtn.addEventListener('click', closeForm);
+        modalLayer.addEventListener('click', closeForm);
+        modalBody.addEventListener('click', function (event) {
+            //ngừng nổi bọt
+            event.stopPropagation()
+        })
+        modalProfile.addEventListener('mouseover', openProfileOptions);
+        modalProfile.addEventListener('mouseout', closeProfileOptions);
+    }
+
+    handleForms();
+
+</script>
+</html>

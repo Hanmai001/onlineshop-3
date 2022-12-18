@@ -1,0 +1,205 @@
+body {
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+/* ---------------------------- */
+/* PRODUCT-INFO PAGE */
+.list-order {
+    min-width: 1200px;
+}
+
+.list-order .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateZ(0);
+    z-index: 100;
+    height: 100px;
+    background: linear-gradient(-180deg, #f53d2d, #f63);
+    transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+}
+.list-order .user-option>img {
+    border-radius: 50%;
+}
+.list-order ul {
+    list-style-type: none;
+    padding-left: 0 !important;
+    display: inline-block;
+}
+
+.list-order .nav-profile>li {
+    position: relative;
+}
+
+.list-order ul li:hover {
+    cursor: pointer;
+}
+.list-order .header .logo a {
+    position: relative;
+    top: -0.8rem;
+    right: -1rem;
+    text-decoration: none;
+    color: rgb(210, 14, 53);
+    font-weight: 800;
+    font-size: 35px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+/* SUBNAV */
+.list-order .subnav {
+    display: none;
+    z-index: 1;
+    width: 150px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    /*Bóng đổ cho subnav*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.list-order .subnav.open {
+    display: block;
+}
+.list-order .subnav>li {
+    text-align: left;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.list-order .subnav>li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.list-order .subnav>li:hover {
+    background-color: #d5d5d5;
+}
+
+.list-order .cart-icon a {
+    text-decoration: none;
+    position: relative;
+}
+
+.list-order .cart-icon i {
+    font-size: 24px;
+    color: white;
+}
+
+.list-order .cart-icon span {
+    text-align: center;
+    position: absolute;
+    border-radius: 50%;
+    font-size: 15px;
+    width: 30px;
+    color: #f53d2d;
+    background-color: #fff;
+    top: -1rem;
+    right: -1rem;
+}
+
+.list-order .cart-icon i:hover {
+    cursor: pointer;
+}
+
+.list-order .input-search input {
+    width: 80%;
+}
+
+.list-order .input-search input:focus {
+    outline: none;
+}
+.list-order .input-search button {
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    right: 11.5%;
+    top: 3px;
+}
+.list-order .input-search i {
+    right: 12.5%;
+    top: 6px;
+}
+
+/* CONTENT */
+.list-order .content {
+    margin-top: 7rem;
+    background-color: #f5f5f5;
+    ;
+}
+
+.list-order .content .tags-pane .tags {
+    width: 95%;
+    background-color: #fff;
+}
+
+.list-order .content .tags-pane .tags span:not(.tag1) {
+    color: #8b8b8b;
+    text-align: center;
+}
+
+.list-order .content .list-item .item {
+    width: 95%;
+    background-color: #fff;
+}
+
+/* ORDER ITEM */
+.list-order .item .product .product-price span {}
+
+.list-order .item .product .num-buy button {
+    display: inline-block;
+    border: 1px solid rgb(214, 214, 215);
+    background-color: #fff;
+    padding: 0.2rem 0.5rem;
+}
+
+.list-order .item .product .num-buy input {
+    display: inline-block;
+    width: 40px;
+    border: 1px solid rgb(214, 214, 215);
+    background-color: #fff;
+    padding: 0.2rem 0;
+    padding-left: 0.8rem;
+}
+
+.list-order .item .product .total-price span {
+    color: #f63;
+}
+
+.list-order .item .product .product-action button {
+    border: none;
+    background-color: #fff;
+}
+
+.list-order .content .confirm-order {
+    width: 95%;
+    background-color: #fff;
+}
+
+.list-order .content .confirm-order .currency,
+.list-order .content .confirm-order .price {
+    color: rgb(239, 102, 85);
+}
+.list-order .content .buy-now-btn {
+    text-decoration: none;
+    color: #ffff;
+    border: 1.5px solid rgb(245, 77, 16);
+    background-color: rgb(245, 77, 16);
+}
+/* FOOTER */
+.list-order .footer {
+    padding-top: 20rem;
+    background-color: #f5f5f5;
+    color: rgb(124, 138, 154);
+}

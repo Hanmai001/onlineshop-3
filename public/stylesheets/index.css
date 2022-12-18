@@ -1,0 +1,214 @@
+header {
+    background-color: white;
+}
+
+.title {
+    background-color: white;
+}
+
+body {
+    background-color: #F5F5F5;
+}
+
+.py-3 {
+    background: #F5F5F5;
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important
+}
+
+.admin {
+    height: 7px;
+}
+
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border:
+        solid 1px #BA68C8
+}
+
+.text-right {
+    position: absolute;
+    width: 380px;
+    height: 48px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #000000;
+}
+
+.profile-button {
+    background: #EE4510;
+    box-shadow: none;
+    border: none;
+}
+
+.productManage .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+    display: none;
+
+}
+
+.productManage .modal.open {
+    display: flex;
+}
+
+.productManage .modal-container {
+    background: #fff;
+    width: 700px;
+    /*để sdung pos absolute cho mấy thẻ con */
+    position: relative;
+
+    /* Để sdung keyframes modalFadeIn đi chậm ease 0.3s*/
+    animation: modalFadeIn ease 0.5s
+}
+
+.productManage .modal-body {
+    padding: 16px;
+}
+
+.productManage .modal-label {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+/*Khung input*/
+.productManage .modal-input {
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+
+.productManage button[type="submit"] {
+    border: none;
+    color: #fff;
+    background-color: #f53d2d;
+    padding: 10px 24px;
+}
+
+.productManage .modal-body .cancel {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #ccc;
+    padding: 10px 24px;
+}
+
+.productManage .form__choose-file label {
+    border: 1px solid #d5d5d5;
+    width: 120px;
+    padding: 10px 0;
+    color: rgb(124, 138, 154);
+}
+
+.avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.avatar label {
+    border: 1px solid #d5d5d5;
+    width: 120px;
+    padding: 10px 0;
+    color: rgb(124, 138, 154);
+}
+
+.avatar label:hover {
+    cursor: pointer;
+}
+
+.sex-profile input {
+    width: 20px;
+}
+
+.sex-profile label {
+    width: 50px;
+    color: #000;
+}
+
+.sex-profile label:first-child {
+    width: 120px;
+    color: rgb(124, 138, 154);
+}
+
+/* Làm trôi ảnh MODAL CONTAINER*/
+/* Tạo ra chuyển động liên tiếp của ảnh tĩnh */
+@keyframes modalFadeIn {
+
+    /* modal container sẽ đi từ -100px đến 0px*/
+    from {
+        opacity: 0;
+        transform: translateY(-150px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-secondary {
+    --bs-btn-color: rgb(12, 12, 12);
+    --bs-btn-bg: #ffffff;
+    --bs-btn-border-color: #6c757d;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #5c636a;
+    --bs-btn-hover-border-color: #565e64;
+    --bs-btn-focus-shadow-rgb: 130, 138, 145;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #565e64;
+    --bs-btn-active-border-color: #51585e;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #6c757d;
+    --bs-btn-disabled-border-color: #6c757d;
+}
