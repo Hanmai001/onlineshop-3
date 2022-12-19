@@ -141,7 +141,7 @@ html {
     outline: none;
 }
 
-.home .input-search button {
+.home .input-search .submit-search {
     border: none;
     background-color: transparent;
     background-repeat: no-repeat;

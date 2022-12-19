@@ -11,13 +11,14 @@
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <meta charset="UTF-8">
 </head>
 
 <body>
     <!-- Block Element Modifier -->
     <div class="home">
-        <form action="" onsubmit="disableEmptyInputs(this)" method="get">
+        <form action="<%=originUrl.length <= 1 ? originUrl : originUrl + '&'%>" id="headForm" onsubmit="disableEmptyInputs(this)" method="get">
             <header class="header row">
                 <div class="row pt-2">
                     <div class="col-6">
@@ -58,7 +59,7 @@
                     <div class="col-9 input-search position-relative text-center">
                         <!-- <form action="#"> -->
                         <input type="text" placeholder="Nhập tìm kiếm theo tên" name="name">
-                        <button class="position-absolute text-center">
+                        <button id="submit-seach-form" type="submit" class="position-absolute text-center submit-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
 
@@ -169,7 +170,7 @@
 
 
                     </div>
-                    <div class="products d-flex flex-wrap">
+                    <div class="products d-flex flex-wrap" id="list-products">
 
                         <% for(var i=0; i<products.length; i++) {%>
                             <div class="item my-3 me-4" onclick="chooseProduct('<%= products[i].IDPRODUCT %>')">
@@ -198,16 +199,33 @@
                     </div>
 
                     <!-- PAGING -->
-                    <div class="paging text-center mt-4 fs-3">
-                        <a href="#">&laquo;</a>
-                        <a href="#">1</a>
-                        <a class="active" href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">&raquo;</a>
-                    </div>
+                    <% if(pagination_info.total_pages > 1) { %>
+                        <div class="paging text-center mt-4 fs-3">
+
+                            <% if (pagination_info.current_page> 1) {%>
+                                <a href="<%=originUrl.length <= 1 ? originUrl : originUrl + '&'%>page=<%=pagination_info.current_page-1%>"
+                                    disa>&laquo;</a>
+                                <% } %>
+                                    <% for (var i=iterator; i <=endingLink; i++) {%>
+                                        <% if (i===pagination_info.current_page) {%>
+                                            <a class="active"
+                                                href="<%=originUrl.length <= 1 ? originUrl : originUrl + '&'%>page=<%=i%>">
+                                                <%=i%>
+                                            </a>
+                                            <%} else {%>
+                                                <a
+                                                    href="<%=originUrl.length <= 1 ? originUrl : originUrl + '&'%>page=<%=i%>">
+                                                    <%=i%>
+                                                </a>
+                                                <% } %>
+                                                    <% } %>
+                                                        <% if (endingLink < pagination_info.total_pages) {%>
+                                                            <a href="<%=originUrl.length <= 1 ? originUrl : originUrl + '&'%>page=<%=pagination_info.current_page+1%>"
+                                                                disa>&raquo;</a>
+                                                            <% } %>
+                        </div>
+                        <% } %>
+
                 </div>
             </div>
         </form>
@@ -268,8 +286,8 @@
                         </div>
 
                         <div class="auth-form__controls">
-                            <input type="text" readonly class="btn auth-form__controls-back me-2"
-                                id="js-form-btn-back" placeholder="TRỞ LẠI"/>
+                            <input type="text" readonly class="btn auth-form__controls-back me-2" id="js-form-btn-back"
+                                placeholder="TRỞ LẠI" />
                             <button readonly class="btn btn--primary">ĐĂNG KÝ</button>
                         </div>
                     </div>
@@ -388,6 +406,44 @@
     var message1 = "<%= flashMessages.loginMessage %>";
     var message2 = "<%= flashMessages.registerMessage %>";
     var message3 = "<%= flashMessages.emailMessage %>";
+    // const btn = document.getElementById('submit-seach-form');
+    // btn.addEventListener('click', async (e) => {
+    //     e.preventDefault();
+    //     $.ajax({
+    //         url: "/api/home", // gửi ajax đến file result.php
+    //         type: "get", // chọn phương thức gửi là get
+    //         dateType: "json", // dữ liệu trả về dạng text
+    //         data: {
+    //             page: "<%= pagination_info.current_page %>"
+    //         },
+    //         success: function (result) {
+    //             console.log(result.products);
+    //             $("#list-products").html('');
+
+    //             $.each(result.products, (key, value) => {
+    //                 var item = $('<div class="item my-3 me-4"></div>');
+    //                 var elemsToAppend = $('<div class="img text-center"></div>');
+    //                 elemsToAppend.append('<img src="' + value.LINK + '" alt=""/>')
+    //                 item.append(elemsToAppend);
+    //                 elemsToAppend = $('<div class="name ps-1"></div>');
+    //                 if (value.NAMEPRODUCT.length > 20)
+    //                     elemsToAppend.append('<span>' + value.NAMEPRODUCT.slice(0, 40) + `...` + '</span>');
+    //                 else
+    //                     elemsToAppend.append('<span>' + value.NAMEPRODUCT + '</span>');
+    //                 item.append(elemsToAppend);
+    //                 elemsToAppend = $('<div class="price"></div>');
+    //                 elemsToAppend.append('<span class="me-1">' + value.PRICE + '</span>')
+    //                 item.append(elemsToAppend);
+    //                 elemsToAppend = $('<div class="sold"></div>');
+    //                 elemsToAppend.append('<span class="fw-bold">4/5</span>', '<span class="me-1 fw-bold">' + value.NUMBUY +' đã bán</span>');
+    //                 item.append(elemsToAppend);
+                    
+    //                 $("#list-products").append(item);
+    //             });
+    //         }
+    //     });
+    // })
+
     function chooseProduct(id) {
         window.location.href = "/products/details/" + id;
     }
@@ -461,14 +517,14 @@
             forgetForm.style.display = 'none';
 
         }
-        
+
         if (message1) {
             openForm(2);
         }
         if (message2) {
             openForm(1);
         }
-        
+
         regItem.addEventListener('click', () => openForm(1));
         logItem.addEventListener('click', () => openForm(2));
         forgetItem.addEventListener('click', () => openForm(3));

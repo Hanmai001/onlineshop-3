@@ -6,6 +6,7 @@ const appRoot = require('app-root-path');
 
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const apiController = require('../controllers/apiController');
 const passport = require('../passport');
 
 //Middleware
@@ -37,8 +38,8 @@ const initUserRoute = (app) => {
         res.locals.flashMessages = req.flash();
         next();
     });
-    //<=> route.get('/', (req, res) => {res.render('index.ejs)})
     router.get('/', authController.isLoggedCustomer, userController.getHomepage);
+    router.get('/api/home', authController.isLoggedCustomer, apiController.getHomepage);
     //truyền thso vào url
     router.get('/products/details/:id', authController.isLoggedCustomer, userController.getDetailProductPage);
     router.get('/list-order', authController.isLoggedCustomer, userController.getListOrderPage);
