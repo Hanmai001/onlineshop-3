@@ -10,8 +10,11 @@ let getAdminProfile = (req, res) => {
 let getOdersManage = (req, res) => {
     return res.render('OdersManage.ejs')
 }
-let getUsersManage = (req, res) => {
-    return res.render('UsersManage.ejs')
+let getUsersManage = async (req, res) => {
+
+    const list = await adminService.getUser();
+    console.log(list.length);
+    return res.render('UsersManage.ejs', { list: list });
 }
 let getOriginManage = (req, res) => {
     return res.render('OriginManage.ejs')
@@ -26,7 +29,7 @@ let getChangePassword = (req, res) => {
     return res.render('change-password-admin.ejs')
 }
 let updateInformation = async (req, res) => {
-    console.log(req.file);
+    //console.log(req.file);
     const idUser = req.params.id;
     let ava = res.locals.user.ava;
     if (req.file) {
@@ -85,7 +88,7 @@ let updatePassword = async (req, res) => {
         req.flash('updatePassMsg', 'Xác nhận mật khẩu không trùng.');
         return res.redirect(`/changePassword/${idUser}`);
     }
-    console.log(res.locals.user.username);
+    //console.log(res.locals.user.username);
     if (!await authService.checkUserCredential(res.locals.user.username, curPass)) {
         //console.log("sai mk");
         req.flash('updatePassMsg', 'Nhập sai mật khẩu hiện tại.');

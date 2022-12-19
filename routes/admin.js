@@ -6,6 +6,7 @@ const router = express.Router();
 
 const adminControllers = require('../controllers/adminControllers');
 const authController = require('../controllers/authController');
+const passport = require('../passport');
 //Middleware
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

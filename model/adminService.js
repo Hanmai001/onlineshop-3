@@ -73,8 +73,14 @@ let updatePassword = async (data, idUser) => {
     return result[0] && result.length > 0;
 
 }
+let getUser = async () => {
+    const result = await db.query('SELECT * FROM user us')
+
+    return result[0];
+}
 
 module.exports = {
     updateProfile,
-    updatePassword
+    updatePassword,
+    getUser
 }

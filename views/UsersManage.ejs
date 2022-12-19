@@ -138,21 +138,26 @@
               <th scope="col">Thao tác</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Quốc Duy</td>
-              <td>duyhq47@gmail.com</td>
-              <td>21/10/2022</td>
-              <td>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                  style="text-decoration:underline; color: red;">
-                  Xem chi tiết
-                </button>
+          <div class="d-flex list">
+            <% for(var i=0; i< list.length; i++) {%>
+              <tr>
+                <th scope="row">
+                  <%= list[i].IDUSER%>
+                </th>
+                <td>
+                  <%= list[i].FULLNAME%>
+                </td>
+                <td>
+                  <%= list[i].EMAIL%>
+                </td>
+                <td>21/10/2022</td>
+                <td>
+                  <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    style="text-decoration:underline; color: red;">
+                    Xem chi tiết
+                  </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                   aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -182,129 +187,19 @@
                             </dl>
                           </main>
 
-                        </div> <!-- end profile -->
+                        </div>
                       </div>
 
                     </div>
                   </div>
                 </div>
-              </td>
-              <th scope="col"><button type="button" class="btn btn-secondary">Ban</button><button type="button"
-                  class="btn btn-secondary">Unban</button></th>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Gia Hân</td>
-              <td>HanGia@gmail.com</td>
-              <td>11/11/2022</td>
-              <td>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                  style="text-decoration:underline; color: red;">
-                  Xem chi tiết
-                </button>
+                 </td> -->
+                <th scope="col"><button type="button" class="btn btn-secondary">Ban</button><button type="button"
+                    class="btn btn-secondary">Unban</button></th>
+              </tr>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Thông tin người dùng</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="profile">
-                          <figure>
-                            <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/55758/random-user-31.jpg" alt="" />
-                          </figure>
-                          <main>
-                            <dl>
-                              <dt>Họ tên</dt>
-                              <dd>Mai Trần Gia Hân</dd>
-                              <dt>Giới tính</dt>
-                              <dd>Nữ</dd>
-                              <dt>Năm sinh</dt>
-                              <dd>12/01/2002</dd>
-                              <dt>Email</dt>
-                              <dd>HanGia@gmail.com</dd>
-                              <dt>SĐT</dt>
-                              <dd>0946787123</dd>
-                              <dt>Ngày đăng kí</dt>
-                              <dd>11/11/2022</dd>
-                            </dl>
-                          </main>
-
-                        </div> <!-- end profile -->
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary">Lưu thay đổi</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <th scope="col"><button type="button" class="btn btn-secondary">Ban</button><button type="button"
-                  class="btn btn-secondary">Unban</button></th>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Xuân Quang</td>
-              <td>XuanQuang@gmail.com</td>
-              <td>25/01/2022</td>
-              <td>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                  style="text-decoration:underline; color: red;">
-                  Xem chi tiết
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Thông tin người dùng</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="profile">
-                          <figure>
-                            <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/55758/random-user-31.jpg" alt="" />
-                          </figure>
-                          <main>
-                            <dl>
-                              <dt>Họ tên</dt>
-                              <dd>Hồ Quốc Duy</dd>
-                              <dt>Giới tính</dt>
-                              <dd>Nam</dd>
-                              <dt>Năm sinh</dt>
-                              <dd>28/02/2002</dd>
-                              <dt>Email</dt>
-                              <dd>duyhq47@gmail.com</dd>
-                              <dt>SĐT</dt>
-                              <dd>0946787239</dd>
-                              <dt>Ngày đăng kí</dt>
-                              <dd>21/10/2022</dd>
-                            </dl>
-                          </main>
-
-                        </div> <!-- end profile -->
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary">Lưu thay đổi</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <th scope="col"><button type="button" class="btn btn-secondary">Ban</button><button type="button"
-                  class="btn btn-secondary">Unban</button></th>
-            </tr>
-          </tbody>
+              <% } %>
+          </div>
         </table>
         <br>
         <nav aria-label="Page navigation example">
