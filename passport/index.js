@@ -13,7 +13,7 @@ passport.use(new LocalStrategy({ usernameField: 'username', passReqToCallback: t
 //Add info user to session when authen success
 passport.serializeUser(function (user, cb) {
     process.nextTick(function () {
-        cb(null, { id: user.IDUSER, username: user.USERNAME, email: user.EMAIL, ava: user.AVATAR, admin: user.ADMIN, fullname: user.FULLNAME, phone: user.PHONE, sex: user.SEX, ban: user.BAN });
+        cb(null, { id: user.IDUSER, username: user.USERNAME, admin: user.ADMIN, ban: user.BAN });
     });
 });
 

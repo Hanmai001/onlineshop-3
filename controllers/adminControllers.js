@@ -1,68 +1,64 @@
 const adminService = require('../model/adminService')
 const authService = require('../model/authService')
 
-let getHomePage = (req, res) => {
-    return res.render('index.ejs')
+let getHomePage = async (req, res) => {
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('index.ejs', { ava })
 }
-let getAdminProfile = (req, res) => {
-    return res.render('adminProfile.ejs')
+let getAdminProfile = async (req, res) => {
+    const { EMAIL: email, FULLNAME: fullname, SEX: sex, PHONE: phone, AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    console.log({ email, fullname, sex, phone, ava })
+    return res.render('adminProfile.ejs', { email, fullname, sex, phone, ava });
 }
-let getOdersManage = (req, res) => {
-    return res.render('OdersManage.ejs')
+let getOdersManage = async (req, res) => {
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('OdersManage.ejs', { ava })
 }
 let getUsersManage = async (req, res) => {
-
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
     const list = await adminService.getUser();
     console.log(list.length);
-    return res.render('UsersManage.ejs', { list: list });
+    return res.render('UsersManage.ejs', { list: list, ava });
 }
-let getOriginManage = (req, res) => {
-    return res.render('OriginManage.ejs')
+let getOriginManage = async (req, res) => {
+    return res.render('OriginManage.ejs', { ava })
 }
-let getProductManage = (req, res) => {
-    return res.render('ProductManage.ejs')
+let getProductManage = async (req, res) => {
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('ProductManage.ejs', { ava })
 }
-let getTypeManage = (req, res) => {
-    return res.render('TypeManage.ejs')
+let getTypeManage = async (req, res) => {
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('TypeManage.ejs', { ava })
 }
-let getChangePassword = (req, res) => {
-    return res.render('change-password-admin.ejs')
+let getChangePassword = async (req, res) => {
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('change-password-admin.ejs', {ava})
 }
 let updateInformation = async (req, res) => {
-    //console.log(req.file);
     const idUser = req.params.id;
-    let ava = res.locals.user.ava;
+    const { EMAIL: email, FULLNAME: fullname, SEX: sex, PHONE: phone, AVATAR: ava } = await authService.getUserByID(idUser);
+    let new_ava = ava;
     if (req.file) {
-        ava = '/images/' + req.file.filename;
+        new_ava = '/images/' + req.file.filename;
     }
     const {
-        updateFullname: fullname,
-        updateEmail: email,
-        updatePhone: phone,
-        updateSex: sex
+        updateFullname: new_fullname,
+        updateEmail: new_email,
+        updatePhone: new_phone,
+        updateSex: new_sex
     } = req.body;
-    if (phone.length > 11) {
+
+    //console.log(req.body)
+
+    if (new_phone.length > 11) {
         req.flash('updateProfileMsg', 'SĐT phải nhỏ hơn 12 kí tự.');
         return res.redirect(`/adminProfile/${idUser}`);
     }
 
-    const result = await adminService.updateProfile(req.body, ava, idUser);
+    const result = await userService.updateProfile(req.body, new_ava, idUser);
     //console.log(res.locals.user);
     if (result) {
-        if (req.file && ava)
-            res.locals.user.ava = ava;
-        if (fullname)
-            res.locals.user.fullname = fullname;
-        if (email)
-            res.locals.user.email = email;
-        if (phone)
-            res.locals.user.phone = phone;
-        if (sex && sex === "female")
-            res.locals.user.sex = 'Nữ';
-        else if (sex && sex === "male")
-            res.locals.user.sex = 'Nam';
-        else if (sex && sex === "sexOther")
-            res.locals.user.sex = 'Khác';
         return res.redirect(`/adminProfile/${idUser}`);
     }
     req.flash('updateProfileMsg', 'Kiểm tra lại thông tin cập nhật.');

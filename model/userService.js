@@ -73,8 +73,7 @@ let updatePassword = async (data, idUser) => {
     return result[0] && result.length > 0;
 
 }
-
 module.exports = {
     updateProfile,
-    updatePassword
+    updatePassword,
 }

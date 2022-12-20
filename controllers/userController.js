@@ -13,6 +13,13 @@ const getPagination = (page, size) => {
 };
 
 let getHomepage = async (req, res) => {
+    let ava = null;
+    if (res.locals.user) {
+        const { AVATAR } = await authService.getUserByID(res.locals.user.id);
+        if (AVATAR) ava = AVATAR;
+    }
+    console.log(ava)
+
     let products, allProducts, pagination_info, length;
     const {
         name: nameFilter,
@@ -25,7 +32,7 @@ let getHomepage = async (req, res) => {
         sortPrice: sortPrice,
         timeCreate: timeCreate,
         sort: sortFilter,
-     
+
     } = req.query;
     const {
         page, ...withoutPage
@@ -78,70 +85,66 @@ let getHomepage = async (req, res) => {
     const originUrl = `${req.baseUrl}?${qs.stringify(withoutPage)}`;
     //console.log("Render2...", qs.parse(originUrl))
     return res.render('home.ejs', {
+        ava,
         originUrl,
         products, brands, types, manufacturers, names: random_names, pagination_info, iterator, endingLink, path: req.url
     });
 }
 let getDetailProductPage = async (req, res) => {
     let id = req.params.id;
-
+    let ava = null;
+    if (res.locals.user) {
+        const { AVATAR } = await authService.getUserByID(res.locals.user.id);
+        if (AVATAR) ava = AVATAR;
+    }
+    console.log(ava)
     const product = await productService.getDetailProduct(id);
     const relateProducts = await productService.getRelatedProducts(id);
     const review = await productService.getReview(id);
 
-    return res.render('product-info.ejs', { product: product, relateProducts: relateProducts, review: review });
+    return res.render('product-info.ejs', { product: product, relateProducts: relateProducts, review: review, ava });
 }
 let getListOrderPage = async (req, res) => {
-    return res.render('list-order.ejs');
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('list-order.ejs', { ava });
 }
 let getProfilePage = async (req, res) => {
-
-    return res.render('my-profile.ejs');
+    const { EMAIL: email, FULLNAME: fullname, SEX: sex, PHONE: phone, AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    console.log({ email, fullname, sex, phone, ava })
+    return res.render('my-profile.ejs', { email, fullname, sex, phone, ava });
 }
 let updateInformation = async (req, res) => {
     const idUser = req.params.id;
-    let ava = res.locals.user.ava;
+    const { EMAIL: email, FULLNAME: fullname, SEX: sex, PHONE: phone, AVATAR: ava } = await authService.getUserByID(idUser);
+    let new_ava = ava;
     if (req.file) {
-        ava = '/images/' + req.file.filename;
+        new_ava = '/images/' + req.file.filename;
     }
     const {
-        updateFullname: fullname,
-        updateEmail: email,
-        updatePhone: phone,
-        updateSex: sex
+        updateFullname: new_fullname,
+        updateEmail: new_email,
+        updatePhone: new_phone,
+        updateSex: new_sex
     } = req.body;
 
     //console.log(req.body)
 
-    if (phone.length > 11) {
+    if (new_phone.length > 11) {
         req.flash('updateProfileMsg', 'SĐT phải nhỏ hơn 12 kí tự.');
         return res.redirect(`/my-profile/${idUser}`);
     }
 
-    const result = await userService.updateProfile(req.body, ava, idUser);
+    const result = await userService.updateProfile(req.body, new_ava, idUser);
     //console.log(res.locals.user);
     if (result) {
-        if (req.file && ava)
-            res.locals.user.ava = ava;
-        if (fullname)
-            res.locals.user.fullname = fullname;
-        if (email)
-            res.locals.user.email = email;
-        if (phone)
-            res.locals.user.phone = phone;
-        if (sex && sex === "female")
-            res.locals.user.sex = 'Nữ';
-        else if (sex && sex === "male")
-            res.locals.user.sex = 'Nam';
-        else if (sex && sex === "sexOther")
-            res.locals.user.sex = 'Khác';
         return res.redirect(`/my-profile/${idUser}`);
     }
     req.flash('updateProfileMsg', 'Kiểm tra lại thông tin cập nhật.');
     return res.redirect(`/my-profile/${idUser}`);
 }
 let getUpdatePasswordPage = async (req, res) => {
-    return res.render('change-password.ejs')
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('change-password.ejs', { ava })
 
 }
 let updatePassword = async (req, res) => {
@@ -179,11 +182,13 @@ let updatePassword = async (req, res) => {
 }
 
 let getListOrderStatusPage = async (req, res) => {
-    return res.render('status-orders.ejs')
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('status-orders.ejs', { ava })
 }
 
 let getPaymentPage = async (req, res) => {
-    return res.render('payment.ejs');
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
+    return res.render('payment.ejs', { ava });
 }
 module.exports = {
     getHomepage,
@@ -195,5 +200,4 @@ module.exports = {
     getPaymentPage,
     updateInformation,
     updatePassword,
-
 }

@@ -11,7 +11,7 @@ let emailExists = async (email) => {
 };
 let getUserByUsername = async (username) => {
     const result = await db.query('select * from user where USERNAME = ? limit 1', [username]);
-    return result[0] && result[0][0];
+    return result[0][0];
 };
 
 //Check info input logging
@@ -38,12 +38,16 @@ let register = async (username, email, password) => {
     const hash = await bcrypt.hash(password, salt);
     return insertUser(username, email, hash);
 }
-
+let getUserByID = async (id) => {
+    const result = await db.query('select EMAIL, FULLNAME, SEX, PHONE, AVATAR from user where IDUSER = ? limit 1', [id]);
+    return result[0][0];
+};
 
 module.exports = {
     usernameExists,
     getUserByUsername,
     checkUserCredential,
     register,
-    emailExists
+    emailExists,
+    getUserByID
 }

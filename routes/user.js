@@ -47,7 +47,16 @@ const initUserRoute = (app) => {
     router.get('/change-password/:id', authController.isLoggedCustomer, userController.getUpdatePasswordPage);
     router.get('/list-orders-status/:id', authController.isLoggedCustomer, userController.getListOrderStatusPage);
     router.get('/payment', authController.isLoggedCustomer, userController.getPaymentPage);
-    router.post('/register', authController.handleRegister);
+    router.post('/register', authController.handleRegister, passport.authenticate("local",
+        {
+            failureRedirect: "/",
+        }), (req, res) => {
+            if (req.user.ADMIN == '1') {
+                res.redirect('/static');
+            }
+            else
+                res.redirect('/');
+        });
 
     router.post('/login', passport.authenticate("local",
         {

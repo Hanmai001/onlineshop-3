@@ -23,7 +23,7 @@ let isLoggedCustomer = async (req, res, next) => {
     else
         return res.send("Bạn đang là Admin trang web");
 }
-let handleRegister = async (req, res) => {
+let handleRegister = async (req, res, next) => {
     // syntax validation
     //console.log(req.body)
     if (!ajv.validate(registerSchema, req.body)) {
@@ -49,8 +49,7 @@ let handleRegister = async (req, res) => {
         req.flash('registerMessage', result)
         return res.redirect('/');
     }
-    req.flash('registerMessage', 'Đăng kí thành công!!!')
-    return res.redirect('/');
+    next();
 }
 let logout = (req, res) => {
     req.logout(function (err) {
@@ -63,9 +62,10 @@ let logout = (req, res) => {
 };
 
 
+
 module.exports = {
     handleRegister,
     logout,
     isLoggedAdmin,
-    isLoggedCustomer
+    isLoggedCustomer,
 }

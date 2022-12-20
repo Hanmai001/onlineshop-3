@@ -47,6 +47,7 @@
     "mysql2": "^2.3.3",
     "nopt": "^1.0.10",
     "normalize-path": "^3.0.0",
+    "paginator": "^1.0.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "picomatch": "^2.3.1",
