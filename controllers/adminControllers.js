@@ -57,7 +57,7 @@ let updateInformation = async (req, res) => {
         return res.redirect(`/adminProfile/${idUser}`);
     }
 
-    const result = await userService.updateProfile(req.body, new_ava, idUser);
+    const result = await adminService.updateProfile(req.body, new_ava, idUser);
     //console.log(res.locals.user);
     if (result) {
         return res.redirect(`/adminProfile/${idUser}`);
