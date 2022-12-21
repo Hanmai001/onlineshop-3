@@ -17,7 +17,7 @@ let getUserByUsername = async (username) => {
 //Check info input logging
 let checkUserCredential = async (username, password) => {
     const user = await getUserByUsername(username);
-    console.log('user: ', user)
+    //console.log('user: ', user)
     if (!user) return null;
     if (await bcrypt.compare(password, user.PASSWORD))
         return user;

@@ -33,6 +33,7 @@ const upload = multer({ storage: storage, fileFilter: imageFilter });
 const initAdminRoute = (app) => {
     router.get('/static', authController.isLoggedAdmin, adminControllers.getHomePage);
     router.get('/adminProfile/:id', authController.isLoggedAdmin, adminControllers.getAdminProfile);
+    router.get('/manage/details-user/:id', authController.isLoggedAdmin, adminControllers.getDetailsUser);
     router.get('/OdersManage', authController.isLoggedAdmin, adminControllers.getOdersManage);
     router.get('/UsersManage', authController.isLoggedAdmin, adminControllers.getUsersManage);
     router.get('/OriginManage', authController.isLoggedAdmin, adminControllers.getOriginManage);

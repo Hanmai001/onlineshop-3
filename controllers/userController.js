@@ -18,7 +18,7 @@ let getHomepage = async (req, res) => {
         const { AVATAR } = await authService.getUserByID(res.locals.user.id);
         if (AVATAR) ava = AVATAR;
     }
-    console.log(ava)
+    //console.log(ava)
 
     let products, allProducts, pagination_info, length;
     const {
@@ -39,7 +39,7 @@ let getHomepage = async (req, res) => {
     } = req.query;
 
     let currentPage = req.query.page ? +req.query.page : 1;
-    console.log(req.query);
+    //console.log(req.query);
     let random_names = [];
     allProducts = await productService.getAllProduct();
     length = allProducts.length;
@@ -98,7 +98,7 @@ let getDetailProductPage = async (req, res) => {
         const { AVATAR } = await authService.getUserByID(res.locals.user.id);
         if (AVATAR) ava = AVATAR;
     }
-    console.log(ava)
+    //console.log(ava)
     const product = await productService.getDetailProduct(id);
     const relateProducts = await productService.getRelatedProducts(id);
     const review = await productService.getReview(id);
@@ -111,7 +111,7 @@ let getListOrderPage = async (req, res) => {
 }
 let getProfilePage = async (req, res) => {
     const { EMAIL: email, FULLNAME: fullname, SEX: sex, PHONE: phone, AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
-    console.log({ email, fullname, sex, phone, ava })
+    //console.log({ email, fullname, sex, phone, ava })
     return res.render('my-profile.ejs', { email, fullname, sex, phone, ava });
 }
 let updateInformation = async (req, res) => {
