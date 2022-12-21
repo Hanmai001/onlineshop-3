@@ -72,6 +72,7 @@ let getHomepage = async (req, res) => {
         if (currentPage < 1) currentPage = 1;
         else if (currentPage > pagination_info.total_pages) currentPage = pagination_info.total_pages;
         const { limit, offset } = getPagination(currentPage - 1, req.query.size);
+        console.log(limit, offset)
         products = await productService.getProductsPage(limit, offset);
     }
 

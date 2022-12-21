@@ -258,6 +258,7 @@ let getFilterProductsPage = async (queryFilter, limit, offset) => {
         }
     }
     sql += ') a LIMIT ?, ?';
+    if (offset < 0) offset = 0;
     values.push(offset);
     values.push(limit);
     const result = await db.query(sql, values);
