@@ -21,6 +21,7 @@ let getUsersManage = async (req, res) => {
     return res.render('UsersManage.ejs', { list: list, ava });
 }
 let getOriginManage = async (req, res) => {
+    const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
     return res.render('OriginManage.ejs', { ava })
 }
 let getProductManage = async (req, res) => {
@@ -33,7 +34,7 @@ let getTypeManage = async (req, res) => {
 }
 let getChangePassword = async (req, res) => {
     const { AVATAR: ava } = await authService.getUserByID(res.locals.user.id);
-    return res.render('change-password-admin.ejs', {ava})
+    return res.render('change-password-admin.ejs', { ava })
 }
 let updateInformation = async (req, res) => {
     const idUser = req.params.id;
