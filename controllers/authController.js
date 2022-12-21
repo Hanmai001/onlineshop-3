@@ -43,7 +43,10 @@ let handleRegister = async (req, res, next) => {
         req.flash('registerMessage', 'Mật khẩu không trùng')
         return res.redirect('/');
     }
-
+    if (!(/[a-z]/.test(password) && /[A-Z]/.test(password) && /[0-9]/.test(password))) {
+        req.flash('registerMessage', 'Mật khẩu phải có ít nhất 1 kí tự thường, 1 kí tự hoa và số')
+        return res.redirect('/');
+    }
     const result = await authService.register(username, email, password);
     if (result) {
         req.flash('registerMessage', result)

@@ -18,7 +18,8 @@
 <body>
     <!-- Block Element Modifier -->
     <div class="home">
-        <form action="<%=originUrl.length <= 1 ? originUrl : originUrl + '&'%>" id="headForm" onsubmit="disableEmptyInputs(this)" method="get">
+        <form action="<%=originUrl.length <= 1 ? originUrl : originUrl + '&'%>" id="headForm"
+            onsubmit="disableEmptyInputs(this)" method="get">
             <header class="header row">
                 <div class="row pt-2">
                     <div class="col-6">
@@ -29,8 +30,7 @@
 
                     <% if(user){ %>
                         <div class="col-6 text-end user-option">
-                            <img src="<%= ava ? ava : '/images/profile-icon.png' %>" alt="" width="30px"
-                                height="30px">
+                            <img src="<%= ava ? ava : '/images/profile-icon.png' %>" alt="" width="30px" height="30px">
                             <ul class="text-white ms-2 nav-profile">
                                 <li class="js-option-profile" onmouseover="hoverAva(this)">
                                     <%= user.username %>
@@ -59,7 +59,8 @@
                     <div class="col-9 input-search position-relative text-center">
                         <!-- <form action="#"> -->
                         <input type="text" placeholder="Nhập tìm kiếm theo tên" name="name">
-                        <button id="submit-seach-form" type="submit" class="position-absolute text-center submit-search">
+                        <button id="submit-seach-form" type="submit"
+                            class="position-absolute text-center submit-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
 
@@ -199,7 +200,7 @@
                     </div>
 
                     <!-- PAGING -->
-                    <% if(pagination_info.total_pages > 1) { %>
+                    <% if(pagination_info.total_pages> 1) { %>
                         <div class="paging text-center mt-4 fs-3">
 
                             <% if (pagination_info.current_page> 1) {%>
@@ -251,11 +252,18 @@
                             <div class="auth-form__group">
                                 <input id="username" rule="username" type="text" class="auth-form__input"
                                     placeholder="Username của bạn" name="username" />
+
                             </div>
+                            <p class="text-danger" style="display: none; font-size: 14px;" id="message-username">
+
+                            </p>
                             <div class="auth-form__group">
                                 <input id="email" rule="email" type="email" class="auth-form__input"
                                     placeholder="Email của bạn" name="email" />
                             </div>
+                            <p class="text-danger" style="display: none; font-size: 14px;" id="message-email">
+
+                            </p>
                             <div class="auth-form__group">
                                 <input id="password" rule="password" type="password" class="auth-form__input"
                                     placeholder="Mật khẩu của bạn" name="password" />
@@ -273,22 +281,22 @@
                         </div>
 
                         <div class="auth-form__aside">
-                            <p class="auth-form__policy-text">
+                            <!-- <p class="auth-form__policy-text">
                                 Bằng việc đăng ký, bạn đã đồng ý với Minecraft Shop
                                 <a href="" class="auth-form__text-link">Điều khoản dịch vụ</a> &
                                 <a href="" class="auth-form__text-link">Chính sách bảo mật</a>
-                            </p>
+                            </p> -->
 
-                            <div class="auth-form__switch-wrapper">
+                            <!-- <div class="auth-form__switch-wrapper">
                                 <span class="auth-form__switch-text">Bạn đã có tài khoản?</span>
                                 <span class="auth-form__switch-btn">Đăng nhập</span>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="auth-form__controls">
                             <input type="text" readonly class="btn auth-form__controls-back me-2" id="js-form-btn-back"
                                 placeholder="TRỞ LẠI" />
-                            <button readonly class="btn btn--primary">ĐĂNG KÝ</button>
+                            <button id="register-button" class="btn btn--primary">ĐĂNG KÝ</button>
                         </div>
                     </div>
 
@@ -437,13 +445,45 @@
     //                 elemsToAppend = $('<div class="sold"></div>');
     //                 elemsToAppend.append('<span class="fw-bold">4/5</span>', '<span class="me-1 fw-bold">' + value.NUMBUY +' đã bán</span>');
     //                 item.append(elemsToAppend);
-                    
+
     //                 $("#list-products").append(item);
     //             });
     //         }
     //     });
     // })
 
+    $('#username').change(function () {
+        $.getJSON('/api/verify-username/' + $(this).val(), (data) => {
+            console.log(data);
+            if (data) {
+
+                $('#message-username').hide();
+                $('#register-button').attr('disabled', false)
+            } else {
+
+                $('#message-username').text("Username đã tồn tại.");
+                $('#message-username').show();
+                $('#register-button').attr('disabled', true)
+            }
+        });
+    });
+    $('#email').change(function () {
+        $.getJSON('/api/verify-email/' + $(this).val(), (data) => {
+            console.log(data);
+            if (data) {
+
+                $('#message-email').hide();
+                //$('#success-email').show();
+                $('#register-button').attr('disabled', false)
+            } else {
+
+                $('#message-email').text("Email đã tồn tại.");
+                $('#message-email').show();
+                //$('#success-email').hide();
+                $('#register-button').attr('disabled', true)
+            }
+        });
+    });
     function chooseProduct(id) {
         window.location.href = "/products/details/" + id;
     }

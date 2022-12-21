@@ -1,6 +1,7 @@
 const express = require('express');
 const initUserRoute = require('./routes/user');
 const initAdminRoute = require('./routes/admin');
+const initApiRoute = require('./routes/auth');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -44,6 +45,7 @@ app.use(function (req, res, next) {
 
 initUserRoute(app);
 initAdminRoute(app);
+initApiRoute(app);
 
 
 app.listen(port, () => {

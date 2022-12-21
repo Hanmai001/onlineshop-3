@@ -1,4 +1,5 @@
 const productService = require('../model/productService');
+const authService = require('../model/authService');
 const Paginator = require("paginator");
 const qs = require('qs');
 var paginator = new Paginator(10, 5);
@@ -83,8 +84,19 @@ let getHomepage = async (req, res) => {
     })
 }
 
-
+let verifyEmail = async (req, res) => {
+    const { email } = req.params;
+    const result = await authService.emailExists(email);
+    return res.status(200).json(!result)
+};
+let verifyUsername = async (req, res) => {
+    const { username } = req.params;
+    const result = await authService.usernameExists(username);
+    return res.status(200).json(!result)
+};
 module.exports = {
-    getHomepage
+    getHomepage,
+    verifyEmail,
+    verifyUsername
 }
 
