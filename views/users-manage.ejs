@@ -128,9 +128,8 @@
           </div>
         </div>
       <!--SORT USER-MANAGE-->
-        
-
         <br>
+        
         <div class="d-flex justify-content-center">
           <h3>Bảng quản lí người dùng</h3>
         </div>
@@ -233,135 +232,6 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous">
 
-var message1 = "<%= flashMessages.loginMessage %>";
-    var message2 = "<%= flashMessages.registerMessage %>";
-    var message3 = "<%= flashMessages.emailMessage %>";
-   
-    $('#username').change(function () {
-        $.getJSON('/api/verify-username/' + $(this).val(), (data) => {
-            console.log(data);
-            if (data) {
-
-                $('#message-username').hide();
-                $('#register-button').attr('disabled', false)
-            } else {
-
-                $('#message-username').text("Username đã tồn tại.");
-                $('#message-username').show();
-                $('#register-button').attr('disabled', true)
-            }
-        });
-    });
-    $('#email').change(function () {
-        $.getJSON('/api/verify-email/' + $(this).val(), (data) => {
-            console.log(data);
-            if (data) {
-
-                $('#message-email').hide();
-                //$('#success-email').show();
-                $('#register-button').attr('disabled', false)
-            } else {
-
-                $('#message-email').text("Email đã tồn tại.");
-                $('#message-email').show();
-                //$('#success-email').hide();
-                $('#register-button').attr('disabled', true)
-            }
-        });
-    });
-    function chooseProduct(id) {
-        window.location.href = "/products/details/" + id;
-    }
-    function clickCart() {
-        if ("<%= user %>")
-            window.location.href = "/list-order";
-        else {
-            window.location.href = "/";
-        }
-    }
-    function hoverAva() {
-        let modalProfile = document.querySelector('.js-option-profile');
-        let subnav = document.querySelector('.js-subnav');
-        const openProfileOptions = () => {
-            subnav.classList.add('open');
-        }
-        const closeProfileOptions = () => {
-            subnav.classList.remove('open');
-        }
-
-        modalProfile.addEventListener('mouseover', openProfileOptions);
-        modalProfile.addEventListener('mouseout', closeProfileOptions);
-    }
-    function handleForms() {
-        let regItem = document.getElementById('register-item'); // get element of register item
-        let logItem = document.getElementById('login-item'); // get element of register item
-        let forgetItem = document.getElementById('forget-item');
-        let btnBack = document.getElementById('js-form-btn-back');
-
-        let modalLayer = document.querySelector('.modal'); // get element of modal layer
-        let modalBody = document.querySelector('.modal__body');
-
-        let regForm = document.getElementById('register-form'); // get element of register form
-        let logForm = document.getElementById('login-form'); // get element of login form
-        let forgetForm = document.getElementById('forget-form');
-
-        let regToLogBtn = document.querySelector('#register-form .auth-form__switch-btn'); // get element of login button from register form
-        let logToRegBtn = document.querySelector('#login-form .auth-form__switch-btn'); // get element of register button from login form
-        // let logToForBtn = document.querySelector('#forget-form .auth-form__switch-btn');
-
-        const openForm = (check) => {
-
-            console.log('user: ');
-            modalLayer.classList.add('open');
-            if (check === 1) {
-                regForm.style.display = 'block';
-                logForm.style.display = 'none';
-                forgetForm.style.display = 'none';
-            }
-            else if (check === 2) {
-                regForm.style.display = 'none';
-                logForm.style.display = 'block';
-                forgetForm.style.display = 'none';
-            }
-            else if (check === 3) {
-                regForm.style.display = 'none';
-                logForm.style.display = 'none';
-                forgetForm.style.display = 'block';
-            }
-
-
-        }
-        const closeForm = () => {
-
-            const message = document.getElementById('message');
-            if (message)
-                message.remove();
-            modalLayer.classList.remove('open');
-            regForm.style.display = 'none';
-            logForm.style.display = 'none';
-            forgetForm.style.display = 'none';
-
-        }
-
-        if (message1) {
-            openForm(2);
-        }
-        if (message2) {
-            openForm(1);
-        }
-
-        regItem.addEventListener('click', () => openForm(1));
-        logItem.addEventListener('click', () => openForm(2));
-        forgetItem.addEventListener('click', () => openForm(3));
-        btnBack.addEventListener('click', () => closeForm);
-        modalLayer.addEventListener('click', closeForm);
-        modalBody.addEventListener('click', function (event) {
-            event.stopPropagation()
-        })
-
-
-
-    }
     function disableEmptyInputs(form) {
         var controls = form.elements;
         for (var i = 0, iLen = controls.length; i < iLen; i++) {
@@ -369,7 +239,6 @@ var message1 = "<%= flashMessages.loginMessage %>";
         }
     }
 
-    handleForms();
 </script>
 </body>
 
