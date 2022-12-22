@@ -113,6 +113,8 @@ let getFilterProducts = async (queryFilter) => {
         sql += 'AND PRICE <= ? ';
         values.push(parseFloat(priceTo))
     }
+
+    //////////////////////////
     if (sortFilter && typeof sortFilter === 'string' && (numBuy || sortPrice || timeCreate)) {
         //sort tăng dần
         if (typeof numBuy === 'string') {
@@ -132,6 +134,7 @@ let getFilterProducts = async (queryFilter) => {
             sql += ' DESC';
         }
     }
+    ///////////////////////////////
     const result = await db.query(sql, values);
     return result[0];
 }

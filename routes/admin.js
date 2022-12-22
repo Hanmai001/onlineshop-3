@@ -32,17 +32,17 @@ const upload = multer({ storage: storage, fileFilter: imageFilter });
 
 const initAdminRoute = (app) => {
     router.get('/static', authController.isLoggedAdmin, adminControllers.getHomePage);
-    router.get('/adminProfile/:id', authController.isLoggedAdmin, adminControllers.getAdminProfile);
+    router.get('/admin-profile/:id', authController.isLoggedAdmin, adminControllers.getAdminProfile);
     router.get('/manage/details-user/:id', authController.isLoggedAdmin, adminControllers.getDetailsUser);
-    router.get('/OdersManage', authController.isLoggedAdmin, adminControllers.getOdersManage);
-    router.get('/UsersManage', authController.isLoggedAdmin, adminControllers.getUsersManage);
-    router.get('/OriginManage', authController.isLoggedAdmin, adminControllers.getOriginManage);
-    router.get('/ProductManage', authController.isLoggedAdmin, adminControllers.getProductManage);
-    router.get('/changePassword/:id', authController.isLoggedAdmin, adminControllers.getChangePassword)
-    router.get('/TypeManage', authController.isLoggedAdmin, adminControllers.getTypeManage);
-    router.post('/adminProfile/:id/update-info', upload.single('update-ava'), adminControllers.updateInformation)
+    router.get('/oders-manage', authController.isLoggedAdmin, adminControllers.getOdersManage);
+    router.get('/users-manage/', authController.isLoggedAdmin, adminControllers.getUsersManage);
+    router.get('/origin-manage', authController.isLoggedAdmin, adminControllers.getOriginManage);
+    router.get('/product-manage', authController.isLoggedAdmin, adminControllers.getProductManage);
+    router.get('/change-password-admin/:id', authController.isLoggedAdmin, adminControllers.getChangePassword)
+    router.get('/type-manage', authController.isLoggedAdmin, adminControllers.getTypeManage);
+    router.post('/admin-profile/:id/update-info', upload.single('update-ava'), adminControllers.updateInformation)
     router.get('/logout', authController.logout);
-    router.post('/changePassword/:id/update-password', adminControllers.updatePassword);
+    router.post('/change-password-admin/:id/update-password', adminControllers.updatePassword);
     return app.use('/', router)
 }
 
